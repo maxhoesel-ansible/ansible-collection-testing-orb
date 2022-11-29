@@ -17,7 +17,8 @@ workflows:
           filters: *filters
       - orb-tools/review:
           filters: *filters
-          exclude: "RC0009"
+          # RC009: Command length - triggers on scripts that can't be easily inlined due to parameter usage
+          exclude: "RC009"
       - shellcheck/check:
           filters: *filters
       - orb-tools/publish:
