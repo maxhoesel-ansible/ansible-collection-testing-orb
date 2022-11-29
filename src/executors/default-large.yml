@@ -1,0 +1,5 @@
+description: A basic machine executor suitable for molecule tests using Ubuntu 22.04 (large).
+machine:
+  image: ubuntu-2204:current
+  docker_layer_caching: true
+resource_class: large
