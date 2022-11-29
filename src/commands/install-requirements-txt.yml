@@ -51,6 +51,7 @@ steps:
                 }}-<</parameters.include-python-in-cache-key>>
   - run:
       command: <<parameters.pip-executable>> install -r <<parameters.file>>
+      name: Install requirements.txt
   - when:
       condition: <<parameters.cache>>
       steps:
