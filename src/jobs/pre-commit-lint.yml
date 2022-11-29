@@ -1,0 +1,7 @@
+description: Run pre-commit to lint the collection files
+executor: default
+steps:
+  - checkout
+  - install-requirements-txt
+  - run:
+      command: pre-commit run --all-files

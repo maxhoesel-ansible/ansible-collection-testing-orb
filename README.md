@@ -1,17 +1,11 @@
-# Orb Template
-
+# ansible-collection-testing-orb
 
 [![CircleCI Build Status](https://circleci.com/gh/maxhoesel-ansible/ansible-collection-testing-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/maxhoesel-ansible/ansible-collection-testing-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/maxhoesel-ansible/ansible-collection-testing.svg)](https://circleci.com/orbs/registry/orb/maxhoesel-ansible/ansible-collection-testing) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/maxhoesel-ansible/ansible-collection-testing-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
-
-
-A project template for Orbs.
+A orb containing command and jobs related to testing Ansible collections.
+Note that this orb makes a lot of assumptions about how your collection is structured, it was built with the maxhoesel-ansible collections in mind.
 
 This repository is designed to be automatically ingested and modified by the CircleCI CLI's `orb init` command.
-
-_**Edit this area to include a custom title and description.**_
-
----
 
 ## Resources
 
@@ -21,8 +15,7 @@ _**Edit this area to include a custom title and description.**_
 
 ### How to Contribute
 
-We welcome [issues](https://github.com/maxhoesel-ansible/ansible-collection-testing-orb/issues) to and [pull requests](https://github.com/maxhoesel-ansible/ansible-collection-testing-orb/pulls) against this repository!
-
+This orb is mostly intended for use in my Ansible collections, however, I'm happy to take a look at any Issues or Pull Requests you might have!
 ### How to Publish An Update
 1. Merge pull requests with desired changes to the main branch.
     - For the best experience, squash-and-merge and use [Conventional Commit Messages](https://conventionalcommits.org/).
