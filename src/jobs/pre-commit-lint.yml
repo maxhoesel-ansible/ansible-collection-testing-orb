@@ -5,3 +5,4 @@ steps:
   - install-requirements-txt
   - run:
       command: pre-commit run --all-files
+      name: Run pre-commit

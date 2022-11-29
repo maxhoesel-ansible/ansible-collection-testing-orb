@@ -14,7 +14,5 @@ steps:
   - install-requirements-txt
   - run:
       # Need to initialize tox once to get a clean output
-      command: |
-        tox -l > /dev/null
-        tox -l | grep ansible | grep -v "lint" | circleci tests split > /tmp/tests-to-run
-        while read test; do  echo "Running test $test"; tox -e $test; done </tmp/tests-to-run
+      name: Run Tox Scenario
+      command: <<include(scripts/tox-test.sh)>>
