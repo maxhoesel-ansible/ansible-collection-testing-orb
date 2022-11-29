@@ -34,7 +34,8 @@ workflows:
           collection-name: community.general
           use-project-collection: false
           sphinx-error-on-warn: false
-      - collection-testing/pre-commit-lint
+      - collection-testing/pre-commit-lint:
+          requirements-file: test/requirements.txt
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
