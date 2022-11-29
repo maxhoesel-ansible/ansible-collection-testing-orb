@@ -1,0 +1,4 @@
+# Test requirements txt file. This file is read and installed during orb integration tests.
+
+autopep8==2.0.0
+pre-commit==2.20.0

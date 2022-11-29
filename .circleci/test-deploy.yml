@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ansible-collection-testing: maxhoesel-ansible/ansible-collection-testing@dev:<<pipeline.git.revision>>
+  collection-testing: maxhoesel-ansible/ansible-collection-testing@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
 
 filters: &filters
@@ -8,21 +8,34 @@ filters: &filters
     only: /.*/
 
 jobs:
-  # Create a job to test the commands of your orbs.
-  # You may want to add additional validation steps to ensure the commands are working as expected.
-  command-tests:
-    docker:
-      - image: cimg/base:current
+  podman-test:
+    executor: collection-testing/default
     steps:
       - checkout
-      # Run your orb's commands to validate them.
-      - ansible-collection-testing/greet
+      - collection-testing/install-podman-on-ubuntu
+      - run:
+          command: podman info
+  requirements-txt-test:
+    executor: collection-testing/default
+    steps:
+      - checkout
+      - collection-testing/install-requirements-txt:
+          file: test/requirements.txt
+      - run:
+          command: autopep8 --version
 workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - command-tests:
-          filters: *filters
+      - podman-test
+      - requirements-txt-test
+      # Build the docs for community.general, as our orb is not an ansible project
+      - collection-testing/antsibull-docs:
+          collection-name: community.general
+          use-project-collection: false
+          sphinx-error-on-warn: false
+      - collection-testing/pre-commit-lint:
+          requirements-file: test/requirements.txt
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
@@ -31,7 +44,10 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            - command-tests
+            - podman-test
+            - requirements-txt-test
+            - collection-testing/antsibull-docs
+            - collection-testing/pre-commit-lint
           context: orb-publishing
           filters:
             branches:

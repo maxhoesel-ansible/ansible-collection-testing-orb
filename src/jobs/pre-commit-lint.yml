@@ -1,0 +1,14 @@
+description: Run pre-commit to lint the collection files
+executor: default
+parameters:
+  requirements-file:
+    description: Path to the projects requirements.txt file that includes pre-commit
+    type: string
+    default: requirements.txt
+steps:
+  - checkout
+  - install-requirements-txt:
+      file: <<parameters.requirements-file>>
+  - run:
+      command: pre-commit run --all-files
+      name: Run pre-commit

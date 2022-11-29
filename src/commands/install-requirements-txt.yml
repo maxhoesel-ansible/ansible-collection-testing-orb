@@ -1,0 +1,67 @@
+description: Install a requirements.txt file using pip, with CI caching enabled.
+  Unlike the python orb, this command allows you to specify the pip executable
+parameters:
+  file:
+    type: string
+    default: requirements.txt
+  pip-executable:
+    type: string
+    default: pip3
+  cache:
+    type: boolean
+    default: true
+    description: Whether to enable pip caching
+  cache-version:
+    default: v1
+    description: >
+      Change the default cache version if you need to clear the cache for any
+      reason.
+    type: string
+  include-branch-in-cache-key:
+    default: false
+    description: >
+      If true, this cache bucket will only apply to jobs within the same branch.
+    type: boolean
+  include-python-in-cache-key:
+    default: true
+    description: >
+      If true, this cache bucket will checksum the pyenv python version with the
+      cache-key.
+    type: boolean
+  python-executable:
+    default: python3
+    description: >
+      Executable to run when determining python version.
+    type: string
+steps:
+  - run:
+      command: <<parameters.python-executable>> --version | cut -d ' ' -f2 > /tmp/python-version
+      name: Save python version
+  - when:
+      condition: <<parameters.cache>>
+      steps:
+        - restore_cache:
+            keys:
+              - >-
+                <<parameters.cache-version>>-cci_pycache-<<#parameters.include-branch-in-cache-key>>{{
+                .Branch }}-<</parameters.include-branch-in-cache-key>>{{
+                checksum "<<parameters.file>>"
+                }}-<<#parameters.include-python-in-cache-key>>{{ checksum
+                "/tmp/python-version"
+                }}-<</parameters.include-python-in-cache-key>>
+  - run:
+      command: <<parameters.pip-executable>> install -r <<parameters.file>>
+      name: Install requirements.txt
+  - when:
+      condition: <<parameters.cache>>
+      steps:
+        - save_cache:
+            key: >-
+              <<parameters.cache-version>>-cci_pycache-<<#parameters.include-branch-in-cache-key>>{{
+              .Branch }}-<</parameters.include-branch-in-cache-key>>{{ checksum
+              "<<parameters.file>>"
+              }}-<<#parameters.include-python-in-cache-key>>{{ checksum
+              "/tmp/python-version"
+              }}-<</parameters.include-python-in-cache-key>>
+            paths:
+              - .cache/pip

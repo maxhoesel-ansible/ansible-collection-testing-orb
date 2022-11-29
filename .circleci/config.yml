@@ -1,7 +1,7 @@
 version: 2.1
 setup: true
 orbs:
-  orb-tools: circleci/orb-tools@11.1
+  orb-tools: circleci/orb-tools@11.5
   shellcheck: circleci/shellcheck@3.1
 
 filters: &filters
@@ -17,6 +17,8 @@ workflows:
           filters: *filters
       - orb-tools/review:
           filters: *filters
+          # RC009: Command length - triggers on scripts that can't be easily inlined due to parameter usage
+          exclude: "RC009"
       - shellcheck/check:
           filters: *filters
       - orb-tools/publish:

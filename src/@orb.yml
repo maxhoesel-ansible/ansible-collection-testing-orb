@@ -1,15 +1,13 @@
 version: 2.1
 
 description: >
-  Sample orb description
-# What will your orb allow users to accomplish?
-# Descriptions should be short, simple, and informative.
+  A orb containing command and jobs related to testing Ansible collections.
+  Note that this orb makes a lot of assumptions about how your collection is structured,
+  it was built with the maxhoesel-ansible collections in mind.
 
 # This information will be displayed in the orb registry and is not mandatory.
 display:
-  home_url: "https://www.example.com/docs"
   source_url: "https://github.com/maxhoesel-ansible/ansible-collection-testing-orb"
-
 # If your orb requires other orbs, you can import them like this. Otherwise remove the "orbs" stanza.
 # orbs:
 #  hello: circleci/hello-build@0.0.5

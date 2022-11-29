@@ -1,13 +1,19 @@
 description: >
-  Sample example description.
+  Simple workflow example
 # Provide a use-case based example for using this orb.
 # Everything in the `usage` section will be displayed in the orb registry.
 # Comments are not retained.
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    collection-test: maxhoesel-ansible/ansible-collection-testing@0.1.0
   workflows:
-    use-my-orb:
+    ci:
       jobs:
-        - <orb-name>/<job-name>
+        - collection-test/pre-commit-lint
+        - collection-test/antsibull-docs:
+            collection-name: maxhoesel.smallstep
+        - collection-test/tox-role-scenarios:
+            parallelism: 15
+        - modules-sanity
+        - modules-integration
