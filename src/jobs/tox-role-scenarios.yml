@@ -6,7 +6,15 @@ parameters:
     description: Split role tests across this number of executors
     type: integer
     default: 1
-executor: default
+  resource-class:
+    description: Set the executor resource class. Can be any of the machine resource classes.
+    type: enum
+    default: medium
+    enum: ["medium", "large", "xlarge", "2xlarge"]
+machine:
+  image: ubuntu-2204:current
+  docker_layer_caching: true
+resource_class: <<parameters.resource-class>>
 parallelism: <<parameters.parallelism>>
 steps:
   - checkout
