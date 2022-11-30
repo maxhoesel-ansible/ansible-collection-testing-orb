@@ -1,12 +1,16 @@
 description: Run pre-commit to lint the collection files
 docker:
-  - image: cimg/python:3.8
+  - image: cimg/python:<<parameters.python-version>>
 resource_class: small
 parameters:
   requirements-file:
     description: Path to the projects requirements.txt file that includes pre-commit
     type: string
     default: requirements.txt
+  python-version:
+    description: Python version to use for running pre-commit. Must be a valid tag for the cimg/python image
+    type: string
+    default: 3.11
 steps:
   - checkout
   - setup_remote_docker:
