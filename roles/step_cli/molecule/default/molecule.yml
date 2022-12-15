@@ -1,0 +1,104 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: podman
+platforms:
+  # We use the images provided by geerlingguy where possible, as they provide out-of-the-box
+  # support for Ansible (pre_build_image=true, speeds up testing).
+  - name: step-cli-ubuntu-22
+    image: "docker.io/geerlingguy/docker-ubuntu2204-ansible"
+    groups:
+      - ubuntu
+    override_command: false
+    pre_build_image: true
+    systemd: always
+
+  - name: step-cli-ubuntu-20
+    image: "docker.io/geerlingguy/docker-ubuntu2004-ansible"
+    groups:
+      - ubuntu
+    override_command: false
+    pre_build_image: true
+    systemd: always
+
+  - name: step-cli-ubuntu-18
+    image: "docker.io/geerlingguy/docker-ubuntu1804-ansible"
+    groups:
+      - ubuntu
+    override_command: false
+    pre_build_image: true
+    systemd: always
+
+  - name: step-cli-debian-11
+    image: "docker.io/geerlingguy/docker-debian11-ansible"
+    groups:
+      - debian
+    override_command: false
+    pre_build_image: true
+    systemd: always
+
+  - name: step-cli-debian-10
+    image: "docker.io/geerlingguy/docker-debian10-ansible"
+    groups:
+      - debian
+    override_command: false
+    pre_build_image: true
+    systemd: always
+
+  - name: step-cli-rockylinux-9
+    image: "docker.io/geerlingguy/docker-rockylinux9-ansible"
+    groups:
+      - rockylinux
+    override_command: false
+    pre_build_image: true
+    systemd: always
+
+  - name: step-cli-rockylinux-8
+    image: "docker.io/geerlingguy/docker-rockylinux8-ansible"
+    groups:
+      - rockylinux
+    override_command: false
+    pre_build_image: true
+    systemd: always
+
+  - name: step-cli-fedora-36
+    image: "docker.io/geerlingguy/docker-fedora36-ansible"
+    groups:
+      - fedora
+    override_command: false
+    pre_build_image: true
+    systemd: always
+
+provisioner:
+  name: ansible
+  env:
+    # This is required for podman to function: https://github.com/ansible-community/molecule-podman/issues/2
+    ANSIBLE_PIPELINING: false
+    #ANSIBLE_VERBOSITY: 3 # enable for debugging
+  inventory:
+    group_vars:
+      all:
+        # These will be set to a concrete version if running from tox,
+        # fallback on the latest version if running molecule directly
+        step_cli_version: ${STEP_CLI_VERSION:-latest}
+        step_ca_version: ${STEP_CA_VERSION:-latest}
+        step_cli_executable: /bin/step-cli-molecule
+
+scenario:
+  test_sequence:
+    - lint
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - check # also run check mode in regular tests
+    - side_effect
+    - verify
+    - destroy
+
+verifier:
+  name: ansible

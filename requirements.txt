@@ -1,0 +1,17 @@
+# Requirements for the mock collection. Used during test runs
+
+# Module deps, useful for editor intellisense, etc.
+ansible-core==2.14.0
+
+# Linting & Formatting
+ansible-lint==6.9.0
+pylint==2.15.7
+autopep8==2.0.0
+pre-commit==2.20.0
+
+# Testing
+tox==3.27.1
+
+# Utility packages needed for scripts
+pyyaml==6.0.0
+packaging==21.3

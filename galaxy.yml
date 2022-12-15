@@ -1,0 +1,21 @@
+namespace: maxhoesel
+name: orb_test
+version: 0.1.0
+readme: README.md
+authors:
+- Max Hösel ansible@maxhoesel.de
+description: DO NOT USE THIS! Mock Collection for testing the ansible-collection-testing orb
+license_file: 'LICENSE'
+tags: []
+dependencies: {}
+repository: https://github.com/maxhoesel-ansible/ansible-collection-testing-orb
+build_ignore:
+- '*.tar.gz'
+- .venv*
+- .github
+- .tox
+- .pytest_cache
+- scripts
+- docs
+- .circleci
+- src

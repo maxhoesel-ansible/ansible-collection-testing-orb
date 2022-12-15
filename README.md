@@ -7,6 +7,12 @@ Note that this orb makes a lot of assumptions about how your collection is struc
 
 This repository is designed to be automatically ingested and modified by the CircleCI CLI's `orb init` command.
 
+## Mock collection
+
+This repository contains a mock ansible collection called `maxhoesel.orb_test` that is used to validate the functionality of commands.
+Roles and plugins are taken from some of my other projects, they are used to ensure that doc builds/tox integration tests work.
+See `plugins`,`roles` and `tox.ini` for details.
+
 ## Resources
 
 [CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/maxhoesel-ansible/ansible-collection-testing) - The official registry page of this orb for all versions, executors, commands, and jobs described.
