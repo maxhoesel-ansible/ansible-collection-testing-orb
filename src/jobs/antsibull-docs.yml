@@ -21,8 +21,12 @@ parameters:
       Whether Sphinx should error out if there are warnings
     type: boolean
     default: true
+  python-version:
+    description: Python version to use for running antsibull-docs. Must be a valid tag for the cimg/python image
+    type: string
+    default: "3.11"
 docker:
-  - image: cimg/python:3.8
+  - image: cimg/python:<<parameters.python-version>>
 resource_class: small
 steps:
   - checkout
