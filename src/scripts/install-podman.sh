@@ -19,3 +19,6 @@ sudo apt-get -qq -y install podman aardvark-dns
 sudo sysctl kernel.unprivileged_userns_clone=1
 sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "$(whoami)"
 sudo podman system migrate
+
+# Enable the socket
+sudo systemctl enable --now podman.socket
