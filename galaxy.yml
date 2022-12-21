@@ -1,6 +1,6 @@
 namespace: maxhoesel
 name: orb_test
-version: 0.1.0
+version: 0.2.4-pre6
 readme: README.md
 authors:
 - Max Hösel ansible@maxhoesel.de
