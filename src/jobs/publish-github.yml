@@ -1,14 +1,22 @@
 description: Push the collection to a Github release.
 parameters:
+  python-version:
+    description: Python version of the circleci python image. Must be a valid tag for the cimg/python image
+    type: string
+    default: "3.11"
   github-token-env-variable:
     description: Name of the environment variable containing the Github PAT
     type: string
     default: GITHUB_TOKEN
 docker:
-  - image: cimg/go:1.18
+  - image: cimg/python:<<parameters.python-version>>
 resource_class: small
 steps:
   - checkout
+  - run:
+      name: Install golang
+      command: |
+        sudo apt-get update && sudo apt-get install -y golang
   - install-requirements-txt
   - build-install-collection:
       install: false

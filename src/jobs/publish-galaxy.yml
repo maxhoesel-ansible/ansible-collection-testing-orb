@@ -19,4 +19,4 @@ steps:
       path: ./dist
   - run:
       name: Upload collection to ansible-galaxy
-      command: ansible-galaxy collection publish ./dist/*.tar.gz --api-token ${<<parameters.token-env-variable>>}
+      command: ansible-galaxy collection publish ./dist/*.tar.gz --token ${<<parameters.token-env-variable>>}
