@@ -27,4 +27,4 @@ steps:
         go install github.com/tcnksm/ghr@v0.16.0
         # Filters for Semver tags, the regex is taken from the official semver page
         VERSION=$(git describe --tags --abbrev=0 | grep -P '^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')
-        ghr -t ${<<parameters.github-token-env-variable>>} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} ./dist/
+        $(go env GOPATH)/bin/ghr -t ${<<parameters.github-token-env-variable>>} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} ./dist/
