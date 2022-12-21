@@ -3,9 +3,11 @@ orbs:
   collection-testing: maxhoesel-ansible/ansible-collection-testing@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
 
-filters: &filters
+filters: &tagged
   tags:
-    only: /.*/
+    only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
+  branches:
+    ignore: /.*/
 
 jobs:
   podman-test:
@@ -49,8 +51,11 @@ workflows:
           requirements-file: requirements.txt
       - collection-testing/tox-role-scenarios:
           resource-class: large
-      - orb-tools/pack:
-          filters: *filters
+      - orb-tools/pack
+      - collection-testing/publish-github:
+          filters: *tagged
+      - collection-testing/publish-galaxy:
+          filters: *tagged
       - orb-tools/publish:
           orb-name: maxhoesel-ansible/ansible-collection-testing
           vcs-type: << pipeline.project.type >>
@@ -63,9 +68,9 @@ workflows:
             - collection-testing/antsibull-docs
             - collection-testing/pre-commit-lint
             - collection-testing/tox-role-scenarios
-          context: orb-publishing
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
+            - collection-testing/publish-github
+            - collection-testing/publish-galaxy
+          context:
+            - orb-publishing
+            - collection-publishing
+          filters: *tagged

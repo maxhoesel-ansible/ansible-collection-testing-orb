@@ -1,0 +1,22 @@
+description: Push the collection to a Github release.
+parameters:
+  github-token-env-variable:
+    description: Name of the environment variable containing the Github PAT
+    type: string
+    default: GITHUB_TOKEN
+docker:
+  - image: cimg/go:1.18
+resource_class: small
+steps:
+  - checkout
+  - install-requirements-txt
+  - build-install-collection:
+      install: false
+      path: ./dist
+  - run:
+      name: Append collection to github release
+      command: |
+        go get github.com/tcnksm/ghr
+        # Filters for Semver tags, the regex is taken from the official semver page
+        VERSION=$(git describe --abbrev=0 | grep -P '^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')
+        ghr -t ${<<parameters.github-token-env-variable>>} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} ./dist/
