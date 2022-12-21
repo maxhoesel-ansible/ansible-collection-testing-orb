@@ -55,8 +55,12 @@ workflows:
       - orb-tools/pack
       - collection-testing/publish-github:
           filters: *tagged
+          context:
+            - collection-publishing
       - collection-testing/publish-galaxy:
           filters: *tagged
+          context:
+            - collection-publishing
       - orb-tools/publish:
           orb-name: maxhoesel-ansible/ansible-collection-testing
           vcs-type: << pipeline.project.type >>
@@ -73,5 +77,4 @@ workflows:
             - collection-testing/publish-galaxy
           context:
             - orb-publishing
-            - collection-publishing
           filters: *tagged
