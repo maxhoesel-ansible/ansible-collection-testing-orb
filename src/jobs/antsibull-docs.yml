@@ -7,15 +7,8 @@ parameters:
     type: string
     default: docs
   collection-name:
-    description: Collection to generate docs for
+    description: Collection to generate docs for. Must be the same name as the root directory collection
     type: string
-  use-project-collection:
-    description: >
-      Whether to build the collection from the project root directory and install it.
-      This assumes that the project collection has the same name as parameters.collection-name
-      If set to false, parameters.collection-name will be installed from ansible-galaxy instead.
-    type: boolean
-    default: true
   sphinx-error-on-warn:
     description: >
       Whether Sphinx should error out if there are warnings
@@ -38,22 +31,8 @@ steps:
         sudo apt update
         sudo apt install -y rsync
       working_directory: <<parameters.dir>>
-  - when:
-      condition: <<parameters.use-project-collection>>
-      steps:
-        - run:
-            name: Build and install collection
-            command: |
-              ansible-galaxy collection build --force
-              ansible-galaxy collection install *.tar.gz --force
-  - when:
-      condition:
-        not: <<parameters.use-project-collection>>
-      steps:
-        - run:
-            name: Install collection from ansible-galaxy
-            command: |
-              ansible-galaxy collection install <<parameters.collection-name>>
+  - build-install-collection:
+      install: true
   - run:
       name: Generate Docs
       command: |

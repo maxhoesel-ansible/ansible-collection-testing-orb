@@ -1,0 +1,17 @@
+description: Build and optionally install a collection tarball
+parameters:
+  path:
+    type: string
+    default: "."
+    description: Store the tarball in this directory (relative from project root)
+  install:
+    type: boolean
+    default: false
+    description: Whether to install the collection locally
+steps:
+  - run:
+      command: ansible-galaxy collection build --output-path <<parameters.path>> --force
+      name: Build Collection
+  - run:
+      command: ansible-galaxy collection install <<parameters.path>>/*.tar.gz --force
+      name: Install Collection
