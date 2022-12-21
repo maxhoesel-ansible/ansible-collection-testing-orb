@@ -1,13 +1,9 @@
-description: Publish the collection to ansible-galaxy.
+description: Publish the collection to ansible-galaxy. The GALAXY_API_TOKEN env var must be set to an API key
 parameters:
   python-version:
     description: Python version of the circleci python image. Must be a valid tag for the cimg/python image
     type: string
     default: "3.11"
-  token-env-variable:
-    description: Name of the environment variable containing the Galaxy API token
-    type: string
-    default: GALAXY_API_TOKEN
 docker:
   - image: cimg/python:<<parameters.python-version>>
 resource_class: small
@@ -19,4 +15,4 @@ steps:
       path: ./dist
   - run:
       name: Upload collection to ansible-galaxy
-      command: ansible-galaxy collection publish ./dist/*.tar.gz --token ${<<parameters.token-env-variable>>}
+      command: ansible-galaxy collection publish ./dist/*.tar.gz --token ${GALAXY_API_TOKEN}
