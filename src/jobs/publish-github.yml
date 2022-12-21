@@ -1,9 +1,13 @@
-description: Push the collection to a Github release. The GITHUB_TOKEN environment variable must be set to a valid PAT
+description: Push the collection to a Github release.
 parameters:
   python-version:
     description: Python version of the circleci python image. Must be a valid tag for the cimg/python image
     type: string
     default: "3.11"
+  github-token-env-variable:
+    description: Name of the environment variable containing the Github PAT
+    type: string
+    default: GITHUB_TOKEN
 docker:
   - image: cimg/python:<<parameters.python-version>>
 resource_class: small
@@ -23,4 +27,4 @@ steps:
         go install github.com/tcnksm/ghr@v0.16.0
         # Filters for Semver tags, the regex is taken from the official semver page
         VERSION=$(git describe --tags --abbrev=0 | grep -P '^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')
-        ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} ./dist/
+        ghr -t ${<<parameters.github-token-env-variable>>} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} ./dist/
