@@ -25,7 +25,7 @@ antsibull-docs collection \
     --breadcrumbs \
     --indexes \
     --dest-dir temp-rst \
-    maxhoesel.smallstep
+    maxhoesel.orb_test
 
 # Copy collection documentation into source directory
 rsync -cprv --delete-after temp-rst/collections/ rst/collections/
