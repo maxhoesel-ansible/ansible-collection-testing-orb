@@ -2,7 +2,7 @@ argument_specs:
   main:
     short_description: Install the C(step-cli) tool on a host.
     description:
-      - This role is used by R(step_bootstrap_host,ansible_collections.maxhoesel.smallstep.step_bootstrap_host_role) and R(step_ca,ansible_collections.maxhoesel.smallstep.step_ca_role), but can also be used standalone to install the cli tool and then do nothing else.
+      - This role is used by and , but can also be used standalone to install the cli tool and then do nothing else.
       - |
         Requirements:
 
