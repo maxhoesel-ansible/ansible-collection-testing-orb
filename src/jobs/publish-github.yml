@@ -8,6 +8,10 @@ parameters:
     description: Name of the environment variable containing the Github PAT
     type: string
     default: GITHUB_TOKEN
+  build-dir:
+    description: Subdirectory to build the collection artifact in
+    type: string
+    default: ./build
 docker:
   - image: cimg/python:<<parameters.python-version>>
 resource_class: small
@@ -20,11 +24,11 @@ steps:
   - install-requirements-txt
   - build-install-collection:
       install: false
-      path: ./dist
+      path: <<parameters.build-dir>
   - run:
       name: Append collection to github release
       command: |
         go install github.com/tcnksm/ghr@v0.16.0
         # Filters for Semver tags, the regex is taken from the official semver page
         VERSION=$(git describe --tags --abbrev=0 | grep -P '^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')
-        $(go env GOPATH)/bin/ghr -t ${<<parameters.github-token-env-variable>>} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} ./dist/
+        $(go env GOPATH)/bin/ghr -t ${<<parameters.github-token-env-variable>>} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} <<parameters.build-dir>>/

@@ -8,6 +8,10 @@ parameters:
     description: Name of the environment variable containing the Galaxy API token
     type: string
     default: GALAXY_API_TOKEN
+  build-dir:
+    description: Subdirectory to build the collection artifact in
+    type: string
+    default: ./build
 docker:
   - image: cimg/python:<<parameters.python-version>>
 resource_class: small
@@ -16,7 +20,7 @@ steps:
   - install-requirements-txt
   - build-install-collection:
       install: false
-      path: ./dist
+      path: <<parameters.build-dir>>
   - run:
       name: Upload collection to ansible-galaxy
-      command: ansible-galaxy collection publish ./dist/*.tar.gz --token ${<<parameters.token-env-variable>>}
+      command: ansible-galaxy collection publish <<parameters.build-dir>>/*.tar.gz --token ${<<parameters.token-env-variable>>}
