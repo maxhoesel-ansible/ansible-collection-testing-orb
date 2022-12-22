@@ -45,9 +45,7 @@ workflows:
       - podman-test
       - requirements-txt-test
       - build-install-collection-test
-      - collection-testing/antsibull-docs:
-          collection-name: maxhoesel.orb_test
-          sphinx-error-on-warn: false
+      - collection-testing/antsibull-docs
       - collection-testing/pre-commit-lint:
           requirements-file: requirements.txt
       - collection-testing/tox-role-scenarios:
