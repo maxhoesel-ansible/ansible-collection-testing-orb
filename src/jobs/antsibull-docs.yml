@@ -6,14 +6,6 @@ parameters:
     description: Path to the folder containing the antsibull template
     type: string
     default: docs
-  collection-name:
-    description: Collection to generate docs for. Must be the same name as the root directory collection
-    type: string
-  sphinx-error-on-warn:
-    description: >
-      Whether Sphinx should error out if there are warnings
-    type: boolean
-    default: true
   python-version:
     description: Python version to use for running antsibull-docs. Must be a valid tag for the cimg/python image
     type: string
@@ -35,9 +27,5 @@ steps:
       install: true
   - run:
       name: Generate Docs
-      command: |
-        mkdir temp-rst
-        antsibull-docs collection --fail-on-error --breadcrumbs --indexes --use-html-blobs --use-current --dest-dir temp-rst <<parameters.collection-name>>
-        rsync -cprv --delete-after temp-rst/collections/ rst/collections/
-        cd rst && sphinx-build -M html ./ ../build -c . --keep-going <<#parameters.sphinx-error-on-warn>> -W <</parameters.sphinx-error-on-warn>>
+      command: ./build.sh
       working_directory: <<parameters.dir>>
