@@ -52,7 +52,8 @@ workflows:
           requirements-file: requirements.txt
       - collection-testing/tox-role-scenarios:
           resource-class: large
-      - orb-tools/pack
+      - orb-tools/pack:
+          filters: *tagged
       - collection-testing/publish-github:
           filters: *tagged
           context:
