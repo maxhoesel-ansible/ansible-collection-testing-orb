@@ -11,6 +11,14 @@ parameters:
     type: enum
     default: medium
     enum: ["medium", "large", "xlarge", "2xlarge"]
+  retries:
+    description: Number of times to retry the scenario tests before giving up.
+    type: integer
+    default: 1
+  retry-delay:
+    description: Wait for this number of seconds between failed test runs.
+    type: integer
+    default: 300
 machine:
   image: ubuntu-2204:current
   docker_layer_caching: false
@@ -24,3 +32,6 @@ steps:
       # Need to initialize tox once to get a clean output
       name: Run Tox Scenario
       command: <<include(scripts/tox-test.sh)>>
+      environment:
+        TEST_RETRIES: <<parameters.retries>>
+        TEST_RETRY_DELAY: <<parameters.retry-delay>>
