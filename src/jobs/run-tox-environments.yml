@@ -19,10 +19,6 @@ parameters:
     type: enum
     default: medium
     enum: ["medium", "large", "xlarge", "2xlarge"]
-  extra-packages:
-    description: Extra APT packages to be installed before running Tox. Must be a space-separated list
-    type: string
-    default: ""
   retries:
     description: Number of times to retry the scenario tests before giving up.
     type: integer
@@ -40,18 +36,6 @@ steps:
   - checkout
   - install-podman-on-ubuntu
   - install-requirements-txt
-  - when:
-      condition:
-        not:
-          equal:
-            - <<parameters.extra-packages>>
-            - ""
-      steps:
-        - run:
-            name: Install extra packages
-            command: <<include(scripts/install-apt-packages.sh)>>
-            environment:
-              EXTRA_PACKAGES: <<parameters.extra-packages>>
   - run:
       name: Run Tox Scenario
       command: <<include(scripts/tox-test.sh)>>
