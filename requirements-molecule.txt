@@ -1,5 +1,4 @@
-# Pinned requirements for molecule tests.
-# Molecule and molecule-docker are ... not the most reliable pieces of software when it comes to updates,
-# so lets manage their versions ourselves
-molecule==4.0.3
-molecule-podman==2.0.3
+# Dependencies for executing the role scenarios.
+# We pin molecule to prevent issues with breaking changes
+molecule==5.1.0
+molecule-plugins[podman]==23.4.1

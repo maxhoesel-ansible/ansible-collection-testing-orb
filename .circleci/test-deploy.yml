@@ -50,8 +50,8 @@ workflows:
           requirements-file: requirements.txt
       - collection-testing/run-tox-environments:
           resource-class: large
-          retries: 3
-          retry-delay: 300
+          retries: 2
+          retry-delay: 60
       - orb-tools/pack:
           filters: *tagged
       - collection-testing/publish-github:
