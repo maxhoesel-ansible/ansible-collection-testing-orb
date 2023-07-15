@@ -36,7 +36,7 @@ retry_with_backoff() {
 
 # Requirements
 retry_with_backoff sudo apt-get update -qq
-retry_with_backoff apt-get install -qq -y lsb-release
+retry_with_backoff sudo apt-get install -qq -y lsb-release
 
 # Install the keyring
 sudo mkdir -p /etc/apt/keyrings
