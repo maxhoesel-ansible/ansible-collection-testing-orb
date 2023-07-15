@@ -50,8 +50,13 @@ steps:
                 "/tmp/python-version"
                 }}-<</parameters.include-python-in-cache-key>>
   - run:
-      command: <<parameters.pip-executable>> install -r <<parameters.file>>
       name: Install requirements.txt
+      command: <<include(scripts/install-requirements-txt.sh)>>
+      environment:
+        PIP_EXECUTABLE: <<parameters.pip-executable>>
+        FILE: <<parameters.file>>
+        TEST_RETRIES: <<parameters.retries>>
+        TEST_RETRY_DELAY: <<parameters.retry-delay>>
   - when:
       condition: <<parameters.cache>>
       steps:
