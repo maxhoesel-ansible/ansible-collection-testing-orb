@@ -32,4 +32,7 @@ tox -l | grep "$TOX_ENVIRONMENTS" | grep -v "$TOX_IGNORE" > /tmp/scenarios-to-ru
 circleci tests split /tmp/scenarios-to-run > /tmp/scenario-instance-tests
 echo "Running the following scenarios on this instance:"
 cat /tmp/scenario-instance-tests
-while read -r test; do  echo "Running test $test"; retry "${TEST_RETRIES:-1}" "${TEST_RETRY_DELAY:-60}" tox -e "$test"; done </tmp/scenario-instance-tests
+while IFS="" read -r -u 123 test || [ -n "$test" ]; do
+    echo "Running test $test"
+    retry "${TEST_RETRIES:-1}" "${TEST_RETRY_DELAY:-60}" tox -e "$test"
+done 123</tmp/scenario-instance-tests
