@@ -28,5 +28,6 @@ retry() {
 
 # Need to initialize tox once to get a clean output
 tox -l > /dev/null
-tox -l | grep "$TOX_ENVIRONMENTS" | grep -v "$TOX_IGNORE" | circleci tests split > /tmp/tests-to-run
-while read -r test; do  echo "Running test $test"; retry "${TEST_RETRIES:-1}" "${TEST_RETRY_DELAY:-60}" tox -e "$test"; done </tmp/tests-to-run
+tox -l | grep "$TOX_ENVIRONMENTS" | grep -v "$TOX_IGNORE" > /tmp/scenarios-to-run
+circleci tests split /tmp/scenarios-to-run > /tmp/scenario-executor-tests
+while read -r test; do  echo "Running test $test"; retry "${TEST_RETRIES:-1}" "${TEST_RETRY_DELAY:-60}" tox -e "$test"; done </tmp/scenario-executor-tests
