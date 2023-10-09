@@ -1,24 +1,14 @@
 description: >
-  Run Pytest to execute collection tests, with parallelism and timing-based splitting
+  Run Pytest to execute collection tests, with support for parallelism and timing-based splitting
 parameters:
-  requirements-txt-file:
-    description: Path to the requirements.txt file containing pytest and other test requirements
-    type: string
-    default: requirements.txt
-  parallelism:
-    description: Split role tests across this number of executors
-    type: integer
-    default: 4
-  executor:
-    description: Executor with which to run this job. Must have python3 installed
-    type: executor
-    default: default
   pytest-args:
     description: Additional parameters to pass to pytest
     type: string
     default: ""
-executor: <<parameters.executor>>
-parallelism: <<parameters.parallelism>>
+  requirements-txt-file:
+    description: Path to the requirements.txt file containing pytest and other test requirements
+    type: string
+    default: requirements.txt
 steps:
   - checkout
   - install-requirements-txt:
