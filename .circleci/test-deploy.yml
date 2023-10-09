@@ -33,9 +33,6 @@ jobs:
   pytest-test:
     executor: collection-testing/default
     steps:
-      - checkout
-      - collection-testing/install-requirements-txt:
-          file: requirements.txt
       - collection-testing/pytest
 
 executors:
