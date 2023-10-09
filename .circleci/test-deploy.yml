@@ -30,6 +30,13 @@ jobs:
       - collection-testing/build-install-collection:
           path: "buildinstall-test/"
           install: true
+  pytest-test:
+    executor: collection-testing/default
+    steps:
+      - checkout
+      - collection-testing/install-requirements-txt:
+          file: requirements.txt
+      - collection-testing/pytest
 
 executors:
   test:
@@ -47,10 +54,6 @@ workflows:
       - collection-testing/antsibull-docs
       - collection-testing/pre-commit-lint:
           requirements-file: requirements.txt
-      - collection-testing/pytest:
-          executor: test
-          parallelism: 2
-          pytest-args: "--co"
       - orb-tools/pack:
           filters: *tagged
       - collection-testing/publish-github:
@@ -71,7 +74,6 @@ workflows:
             - build-install-collection-test
             - collection-testing/antsibull-docs
             - collection-testing/pre-commit-lint
-            - collection-testing/pytest
             - collection-testing/publish-github
             - collection-testing/publish-galaxy
           context:
