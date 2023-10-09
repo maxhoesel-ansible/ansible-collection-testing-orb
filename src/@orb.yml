@@ -2,8 +2,9 @@ version: 2.1
 
 description: >
   A orb containing command and jobs related to testing Ansible collections.
-  Note that this orb makes a lot of assumptions about how your collection is structured,
-  it was built with the maxhoesel-ansible collections in mind.
+  This orb was created to test the collections in https://github.com/maxhoesel-ansible and makes a lot of assumptions about your collection.
+  You may still find some of its contents useful however.
+  See the collections in https://github.com/maxhoesel-ansible for usage examples
 
 # This information will be displayed in the orb registry and is not mandatory.
 display:

@@ -1,0 +1,35 @@
+description: >
+  Run Pytest to execute collection tests, with parallelism and timing-based splitting
+parameters:
+  requirements-txt-file:
+    description: Path to the requirements.txt file containing pytest and other test requirements
+    type: string
+    default: requirements.txt
+  parallelism:
+    description: Split role tests across this number of executors
+    type: integer
+    default: 4
+  executor:
+    description: Executor with which to run this job. Must have python3 installed
+    type: executor
+    default: default
+  pytest-args:
+    description: Additional parameters to pass to pytest
+    type: string
+    default: ""
+executor: <<parameters.executor>>
+parallelism: <<parameters.parallelism>>
+steps:
+  - checkout
+  - install-requirements-txt:
+      file: <<parameters.requirements-txt-file>>
+  - run:
+      name: Run Pytest
+      command: |
+        mkdir results
+        pytest --collect-only -q | head -n -2 | cut -d ':' -f 2- | sed 's/: *//' | circleci tests split --split-by=timings > split-tests
+        echo "Running the following tests:"
+        cat split-tests
+        pytest -k "$(cat split-tests | awk -v d=' or ' '{s=(NR==1?s:s d)$0}END{print s}')" --junitxml=results/junit.xml <<parameters.pytest-args>>
+  - store_test_results:
+      path: results
