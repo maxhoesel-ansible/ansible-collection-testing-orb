@@ -11,13 +11,6 @@ filters: &tagged
     ignore: /.*/
 
 jobs:
-  podman-test:
-    executor: collection-testing/default
-    steps:
-      - checkout
-      - collection-testing/install-podman-on-ubuntu
-      - run:
-          command: podman info
   requirements-txt-test:
     executor: collection-testing/default
     steps:
@@ -38,20 +31,26 @@ jobs:
           path: "buildinstall-test/"
           install: true
 
+executors:
+  test:
+    machine:
+      image: ubuntu-2204:current
+      docker_layer_caching: false
+    resource_class: medium
+
 workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - podman-test
       - requirements-txt-test
       - build-install-collection-test
       - collection-testing/antsibull-docs
       - collection-testing/pre-commit-lint:
           requirements-file: requirements.txt
-      - collection-testing/run-tox-environments:
-          resource-class: large
-          retries: 2
-          retry-delay: 60
+      - collection-testing/pytest:
+          executor: test
+          parallelism: 2
+          pytest-args: "--co"
       - orb-tools/pack:
           filters: *tagged
       - collection-testing/publish-github:
@@ -68,12 +67,11 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            - podman-test
             - requirements-txt-test
             - build-install-collection-test
             - collection-testing/antsibull-docs
             - collection-testing/pre-commit-lint
-            - collection-testing/run-tox-environments
+            - collection-testing/pytest
             - collection-testing/publish-github
             - collection-testing/publish-galaxy
           context:

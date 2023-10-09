@@ -1,0 +1,11 @@
+argument_specs:
+  main:
+    short_description: Example
+    description:
+      - A short example role to test docs and molecule execution
+    options:
+      example_message:
+        type: str
+        description:
+          - What should we say
+        default: "Hello World!"

@@ -1,9 +1,0 @@
-description: >
-  Installs Podman on an Ubuntu-based executor, using the kubic project repositories.
-  Needs at least Ubuntu 22.04
-steps:
-  - run:
-      # Perform a manual install of Podman using the Kubic project repository.
-      # This is pretty nasty but our best option until 24.04 hopefully ships with Podman 4.X or CircleCI adds other machine images with Alma/Arch
-      name: Install Podman
-      command: <<include(scripts/install-podman.sh)>>
