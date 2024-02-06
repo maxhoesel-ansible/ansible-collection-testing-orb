@@ -1,4 +1,4 @@
 # Requirements for the mock collection. Used during test runs
 pytest==7.4.2
 pre-commit==3.4.0
-ansible-core==2.15.4
+ansible-core==2.15.9
