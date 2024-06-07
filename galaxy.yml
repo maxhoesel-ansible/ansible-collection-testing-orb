@@ -3,20 +3,20 @@ name: orb_test
 version: 0.5.3
 readme: README.md
 authors:
-- Max Hösel ansible@maxhoesel.de
+  - Max Hösel ansible@maxhoesel.de
 description: DO NOT USE THIS! Mock Collection for testing the ansible-collection-testing orb
-license_file: 'LICENSE'
+license_file: "LICENSE"
 tags: []
 dependencies: {}
 repository: https://github.com/maxhoesel-ansible/ansible-collection-testing-orb
 build_ignore:
-- '*.tar.gz'
-- .venv*
-- .github
-- .tox
-- .pytest_cache
-- scripts
-- docs
-- .circleci
-- src
-- build
+  - "*.tar.gz"
+  - .venv*
+  - .github
+  - .tox
+  - .pytest_cache
+  - scripts
+  - docs
+  - .circleci
+  - src
+  - build
