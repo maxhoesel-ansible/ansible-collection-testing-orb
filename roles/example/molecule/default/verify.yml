@@ -1,8 +1,0 @@
----
-- name: Verify
-  hosts: all
-  gather_facts: false
-  tasks:
-    - name: Check the laws of physics
-      ansible.builtin.debug:
-        msg: "Checking speed of light ....OK!"
