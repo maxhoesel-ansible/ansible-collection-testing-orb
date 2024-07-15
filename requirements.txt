@@ -16,7 +16,7 @@ alabaster==0.7.16
     # via sphinx
 annotated-types==0.7.0
     # via pydantic
-ansible-compat==24.6.1
+ansible-compat==24.7.0
     # via ansible-lint
 ansible-core==2.17.1
     # via
@@ -38,7 +38,7 @@ antsibull-docs==2.12.0
     # via -r requirements.in
 antsibull-docs-parser==1.0.2
     # via antsibull-docs
-astroid==3.2.2
+astroid==3.2.3
     # via pylint
 asyncio-pool==0.6.0
     # via antsibull-docs
@@ -112,7 +112,7 @@ jinja2==3.1.4
     #   ansible-core
     #   antsibull-docs
     #   sphinx
-jsonschema==4.22.0
+jsonschema==4.23.0
     # via
     #   ansible-compat
     #   ansible-lint
@@ -210,7 +210,7 @@ rich==13.7.1
     # via
     #   ansible-lint
     #   typer
-rpds-py==0.18.1
+rpds-py==0.19.0
     # via
     #   jsonschema
     #   referencing
@@ -264,7 +264,7 @@ subprocess-tee==0.4.2
     # via
     #   ansible-compat
     #   ansible-lint
-tomlkit==0.12.5
+tomlkit==0.13.0
     # via pylint
 twiggy==0.5.1
     # via
