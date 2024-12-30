@@ -20,14 +20,14 @@ alabaster==0.7.16
     # via sphinx
 annotated-types==0.7.0
     # via pydantic
-ansible-compat==24.9.1
+ansible-compat==24.10.0
     # via ansible-lint
 ansible-core==2.18.1
     # via
     #   -r requirements.in
     #   ansible-compat
     #   ansible-lint
-ansible-lint==24.9.2
+ansible-lint==24.12.2
     # via -r requirements.in
 ansible-pygments==0.1.1
     # via
@@ -220,9 +220,7 @@ requests==2.32.3
 resolvelib==1.0.1
     # via ansible-core
 rich==13.9.2
-    # via
-    #   ansible-lint
-    #   typer
+    # via typer
 rpds-py==0.20.0
     # via
     #   jsonschema
