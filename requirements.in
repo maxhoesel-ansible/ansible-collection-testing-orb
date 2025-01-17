@@ -25,7 +25,7 @@ pytest==8.3.4
 pip-tools==7.4.1
 
 # Docs
-antsibull-docs==2.16.2
+antsibull-docs==2.16.3
 ansible-pygments==0.1.1
 sphinx==7.4.7
 sphinx-ansible-theme==0.10.3
