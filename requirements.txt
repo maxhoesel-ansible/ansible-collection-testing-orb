@@ -83,7 +83,7 @@ click==8.1.8
     #   black
     #   pip-tools
     #   typer
-cryptography==44.0.0
+cryptography==44.0.1
     # via ansible-core
 dill==0.3.9
     # via pylint
@@ -293,7 +293,7 @@ typing-extensions==4.12.2
     #   typer
 urllib3==2.3.0
     # via requests
-virtualenv==20.29.1
+virtualenv==20.29.2
     # via pre-commit
 wcmatch==10.0
     # via ansible-lint
