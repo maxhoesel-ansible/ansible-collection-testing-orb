@@ -20,7 +20,7 @@ alabaster==0.7.16
     # via sphinx
 annotated-types==0.7.0
     # via pydantic
-ansible-compat==25.1.2
+ansible-compat==25.1.4
     # via ansible-lint
 ansible-core==2.18.2
     # via
@@ -105,7 +105,7 @@ frozenlist==1.5.0
     # via
     #   aiohttp
     #   aiosignal
-identify==2.6.7
+identify==2.6.8
     # via pre-commit
 idna==3.10
     # via
@@ -176,7 +176,7 @@ pluggy==1.5.0
     # via pytest
 pre-commit==3.8.0
     # via -r requirements.in
-propcache==0.2.1
+propcache==0.3.0
     # via
     #   aiohttp
     #   yarl
@@ -223,7 +223,7 @@ resolvelib==1.0.1
     # via ansible-core
 rich==13.9.4
     # via typer
-rpds-py==0.22.3
+rpds-py==0.23.1
     # via
     #   jsonschema
     #   referencing
