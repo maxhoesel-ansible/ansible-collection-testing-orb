@@ -10,7 +10,7 @@ aiofiles==24.1.0
     #   antsibull-fileutils
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.11.14
+aiohttp==3.11.16
     # via
     #   antsibull-core
     #   antsibull-docs
@@ -22,7 +22,7 @@ annotated-types==0.7.0
     # via
     #   antsibull-changelog
     #   pydantic
-ansible-compat==25.1.4
+ansible-compat==25.1.5
     # via ansible-lint
 ansible-core==2.18.4
     # via
@@ -140,7 +140,7 @@ mccabe==0.7.0
     # via pylint
 mdurl==0.1.2
     # via markdown-it-py
-multidict==6.2.0
+multidict==6.3.2
     # via
     #   aiohttp
     #   yarl
@@ -186,13 +186,13 @@ pycodestyle==2.13.0
     # via autopep8
 pycparser==2.22
     # via cffi
-pydantic==2.11.1
+pydantic==2.11.2
     # via
     #   antsibull-changelog
     #   antsibull-core
     #   antsibull-docs
     #   rstcheck-core
-pydantic-core==2.33.0
+pydantic-core==2.33.1
     # via pydantic
 pygments==2.19.1
     # via
@@ -288,7 +288,7 @@ twiggy==0.5.1
     #   antsibull-docs
 typer==0.15.2
     # via rstcheck
-typing-extensions==4.13.0
+typing-extensions==4.13.1
     # via
     #   pydantic
     #   pydantic-core
@@ -299,7 +299,7 @@ typing-inspection==0.4.0
     # via pydantic
 urllib3==2.3.0
     # via requests
-virtualenv==20.29.3
+virtualenv==20.30.0
     # via pre-commit
 wcmatch==10.0
     # via ansible-lint
@@ -307,7 +307,7 @@ wheel==0.45.1
     # via pip-tools
 yamllint==1.37.0
     # via ansible-lint
-yarl==1.18.3
+yarl==1.19.0
     # via aiohttp
 zipp==3.21.0
     # via importlib-metadata
