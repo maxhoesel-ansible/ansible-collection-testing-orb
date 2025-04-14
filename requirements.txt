@@ -140,7 +140,7 @@ mccabe==0.7.0
     # via pylint
 mdurl==0.1.2
     # via markdown-it-py
-multidict==6.3.2
+multidict==6.4.3
     # via
     #   aiohttp
     #   yarl
@@ -186,7 +186,7 @@ pycodestyle==2.13.0
     # via autopep8
 pycparser==2.22
     # via cffi
-pydantic==2.11.2
+pydantic==2.11.3
     # via
     #   antsibull-changelog
     #   antsibull-core
@@ -288,7 +288,7 @@ twiggy==0.5.1
     #   antsibull-docs
 typer==0.15.2
     # via rstcheck
-typing-extensions==4.13.1
+typing-extensions==4.13.2
     # via
     #   pydantic
     #   pydantic-core
@@ -297,7 +297,7 @@ typing-extensions==4.13.1
     #   typing-inspection
 typing-inspection==0.4.0
     # via pydantic
-urllib3==2.3.0
+urllib3==2.4.0
     # via requests
 virtualenv==20.30.0
     # via pre-commit
