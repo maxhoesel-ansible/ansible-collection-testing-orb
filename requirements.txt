@@ -10,7 +10,7 @@ aiofiles==24.1.0
     #   antsibull-fileutils
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.11.18
+aiohttp==3.12.0
     # via
     #   antsibull-core
     #   antsibull-docs
@@ -22,7 +22,7 @@ annotated-types==0.7.0
     # via
     #   antsibull-changelog
     #   pydantic
-ansible-compat==25.1.5
+ansible-compat==25.5.0
     # via ansible-lint
 ansible-core==2.18.6
     # via
@@ -80,12 +80,12 @@ cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.4.2
     # via requests
-click==8.2.0
+click==8.1.8
     # via
     #   black
     #   pip-tools
     #   typer
-cryptography==44.0.3
+cryptography==45.0.3
     # via ansible-core
 dill==0.4.0
     # via pylint
@@ -107,7 +107,7 @@ frozenlist==1.6.0
     # via
     #   aiohttp
     #   aiosignal
-identify==2.6.10
+identify==2.6.12
     # via pre-commit
 idna==3.10
     # via
@@ -140,7 +140,7 @@ mccabe==0.7.0
     # via pylint
 mdurl==0.1.2
     # via markdown-it-py
-multidict==6.4.3
+multidict==6.4.4
     # via
     #   aiohttp
     #   yarl
@@ -174,7 +174,7 @@ platformdirs==4.3.8
     #   black
     #   pylint
     #   virtualenv
-pluggy==1.5.0
+pluggy==1.6.0
     # via pytest
 pre-commit==3.8.0
     # via -r requirements.in
@@ -186,7 +186,7 @@ pycodestyle==2.13.0
     # via autopep8
 pycparser==2.22
     # via cffi
-pydantic==2.11.4
+pydantic==2.11.5
     # via
     #   antsibull-changelog
     #   antsibull-core
@@ -226,7 +226,7 @@ resolvelib==1.0.1
     # via ansible-core
 rich==14.0.0
     # via typer
-rpds-py==0.24.0
+rpds-py==0.25.1
     # via
     #   jsonschema
     #   referencing
@@ -236,7 +236,7 @@ rstcheck==6.2.4
     #   antsibull-docs
 rstcheck-core==1.2.1
     # via rstcheck
-ruamel-yaml==0.18.10
+ruamel-yaml==0.18.11
     # via ansible-lint
 ruamel-yaml-clib==0.2.12
     # via ruamel-yaml
@@ -286,7 +286,7 @@ twiggy==0.5.1
     # via
     #   antsibull-core
     #   antsibull-docs
-typer==0.15.3
+typer==0.15.4
     # via rstcheck
 typing-extensions==4.13.2
     # via
@@ -295,7 +295,7 @@ typing-extensions==4.13.2
     #   referencing
     #   typer
     #   typing-inspection
-typing-inspection==0.4.0
+typing-inspection==0.4.1
     # via pydantic
 urllib3==2.4.0
     # via requests
