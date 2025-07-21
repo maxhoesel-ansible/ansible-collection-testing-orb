@@ -74,7 +74,7 @@ build==1.2.2.post1
     # via
     #   antsibull-core
     #   pip-tools
-certifi==2025.7.9
+certifi==2025.7.14
     # via requests
 cffi==1.17.1
     # via cryptography
@@ -91,7 +91,7 @@ cryptography==45.0.5
     # via ansible-core
 dill==0.4.0
     # via pylint
-distlib==0.3.9
+distlib==0.4.0
     # via virtualenv
 docutils==0.21.2
     # via
@@ -128,7 +128,7 @@ jinja2==3.1.6
     #   ansible-core
     #   antsibull-docs
     #   sphinx
-jsonschema==4.24.0
+jsonschema==4.25.0
     # via
     #   ansible-compat
     #   ansible-lint
