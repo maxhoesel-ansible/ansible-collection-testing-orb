@@ -48,7 +48,7 @@ antsibull-docutils==1.3.0
     # via
     #   antsibull-changelog
     #   antsibull-docs
-antsibull-fileutils==1.3.0
+antsibull-fileutils==1.4.0
     # via
     #   antsibull-changelog
     #   antsibull-core
@@ -225,9 +225,9 @@ referencing==0.36.2
     #   jsonschema-specifications
 requests==2.32.4
     # via sphinx
-resolvelib==1.0.1
+resolvelib==1.2.0
     # via ansible-core
-rich==14.0.0
+rich==14.1.0
     # via typer
 rpds-py==0.26.0
     # via
@@ -303,7 +303,7 @@ typing-inspection==0.4.1
     # via pydantic
 urllib3==2.5.0
     # via requests
-virtualenv==20.31.2
+virtualenv==20.32.0
     # via pre-commit
 wcmatch==10.1
     # via ansible-lint
