@@ -22,7 +22,7 @@ pre-commit==3.8.0
 pytest==8.4.1
 
 # Generating requirements and syncing venv
-pip-tools==7.4.1
+pip-tools==7.5.0
 
 # Docs
 antsibull-docs==2.20.0
