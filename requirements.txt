@@ -128,7 +128,7 @@ jinja2==3.1.6
     #   ansible-core
     #   antsibull-docs
     #   sphinx
-jsonschema==4.25.0
+jsonschema==4.25.1
     # via
     #   ansible-compat
     #   ansible-lint
@@ -223,7 +223,7 @@ referencing==0.36.2
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.32.4
+requests==2.32.5
     # via sphinx
 resolvelib==1.2.0
     # via ansible-core
@@ -239,7 +239,7 @@ rstcheck==6.2.5
     #   antsibull-docs
 rstcheck-core==1.2.2
     # via rstcheck
-ruamel-yaml==0.18.14
+ruamel-yaml==0.18.15
     # via ansible-lint
 ruamel-yaml-clib==0.2.12
     # via ruamel-yaml
@@ -289,7 +289,7 @@ twiggy==0.5.1
     # via
     #   antsibull-core
     #   antsibull-docs
-typer==0.16.0
+typer==0.16.1
     # via rstcheck
 typing-extensions==4.14.1
     # via
