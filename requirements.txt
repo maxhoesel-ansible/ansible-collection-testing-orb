@@ -229,6 +229,8 @@ resolvelib==1.2.0
     # via ansible-core
 rich==14.1.0
     # via typer
+roman-numerals-py==3.1.0
+    # via sphinx
 rpds-py==0.27.1
     # via
     #   jsonschema
@@ -254,7 +256,7 @@ six==1.17.0
     # via twiggy
 snowballstemmer==3.0.1
     # via sphinx
-sphinx==7.4.7
+sphinx==8.2.3
     # via
     #   -r requirements.in
     #   antsibull-docs
