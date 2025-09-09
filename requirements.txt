@@ -24,7 +24,7 @@ annotated-types==0.7.0
     #   pydantic
 ansible-compat==25.8.1
     # via ansible-lint
-ansible-core==2.19.1
+ansible-core==2.19.2
     # via
     #   -r requirements.in
     #   ansible-compat
