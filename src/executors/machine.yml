@@ -1,0 +1,14 @@
+description: A basic machine executor suitable for running collection tests
+machine:
+  image: <<parameters.image>>
+  docker_layer_caching: false
+resource_class: <<parameters.resource_class>>
+parameters:
+  image:
+    default: ubuntu-2604:current
+    description: "Machine image to use"
+    type: string
+  resource_class:
+    default: medium
+    description: Resource class to use
+    type: string

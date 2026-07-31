@@ -1,0 +1,13 @@
+description: A basic python docker executor
+docker:
+  image: cimg/python:<<parameters.python-version>>
+resource_class: <<parameters.resource_class>>
+parameters:
+  python_version:
+    default: "3.14"
+    description: "Python version to use"
+    type: string
+  resource_class:
+    default: medium
+    description: Resource class to use
+    type: string
