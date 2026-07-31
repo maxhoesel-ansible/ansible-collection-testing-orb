@@ -1,6 +1,6 @@
 description: A basic python docker executor
 docker:
-  image: cimg/python:<<parameters.python-version>>
+  - image: cimg/python:<<parameters.python-version>>
 resource_class: <<parameters.resource_class>>
 parameters:
   python_version:
