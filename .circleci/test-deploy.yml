@@ -6,8 +6,7 @@ orbs:
 
 filters: &tagged
   tags:
-    # Official Semver Regex. Yes, it's LOOOONG
-    only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+    only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)([-+].*)?$/
   branches:
     ignore: /.*/
 
@@ -27,7 +26,7 @@ workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - collection-testing/build-install-collection-test
+      - build-install-collection-test
       - collection-testing/pytest
       - collection-testing/antsibull-docs
       - collection-testing/pre-commit-lint:
