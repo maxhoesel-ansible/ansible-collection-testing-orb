@@ -4,7 +4,7 @@ parameters:
     description: Path to the projects requirements.txt file that includes pre-commit
     type: string
     default: requirements.txt
-  python-version:
+  python_version:
     description: Python version to use for running pre-commit. Must be a valid tag for the cimg/python image
     type: string
     default: "3.14"
