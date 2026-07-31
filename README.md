@@ -22,6 +22,7 @@ See `plugins`,`roles` and `tox.ini` for details.
 ### How to Contribute
 
 This orb is mostly intended for use in my Ansible collections, however, I'm happy to take a look at any Issues or Pull Requests you might have!
+
 ### How to Publish An Update
 1. Update the version number in galaxy.yml
 2. Publish a release on GitHub

@@ -17,7 +17,8 @@ docker:
 resource_class: small
 steps:
   - checkout
-  - install-requirements-txt
+  - python/install-packages:
+      pkg-manager: uv
   - build-install-collection:
       install: false
       path: <<parameters.build-dir>>

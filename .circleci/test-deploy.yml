@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   collection-testing: maxhoesel-ansible/ansible-collection-testing@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.6.1
+  python: circleci/python@4.0.0
 
 filters: &tagged
   tags:
@@ -11,22 +12,14 @@ filters: &tagged
     ignore: /.*/
 
 jobs:
-  requirements-txt-test:
-    executor: collection-testing/default
-    steps:
-      - checkout
-      - collection-testing/install-requirements-txt:
-          file: requirements.txt
-      - run:
-          command: ansible --version
   build-install-collection-test:
     docker:
       - image: cimg/python:3.13
     resource_class: small
     steps:
       - checkout
-      - collection-testing/install-requirements-txt:
-          file: requirements.txt
+      - python/install-packages:
+          pkg-manager: uv
       - collection-testing/build-install-collection:
           path: "buildinstall-test/"
           install: true
@@ -46,7 +39,6 @@ workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - requirements-txt-test
       - build-install-collection-test
       - pytest-test
       - collection-testing/antsibull-docs
@@ -68,7 +60,6 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            - requirements-txt-test
             - build-install-collection-test
             - collection-testing/antsibull-docs
             - collection-testing/pre-commit-lint

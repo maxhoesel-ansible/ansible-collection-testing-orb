@@ -13,8 +13,8 @@ parameters:
     default: "3.11"
 steps:
   - checkout
-  - install-requirements-txt:
-      file: <<parameters.requirements-file>>
+  - python/install-packages:
+      pkg-manager: uv
   - run:
       command: pre-commit run --all-files
       name: Run pre-commit

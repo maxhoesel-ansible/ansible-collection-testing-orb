@@ -5,21 +5,17 @@ parameters:
     description: Additional parameters to pass to pytest
     type: string
     default: ""
-  requirements-txt-file:
-    description: Path to the requirements.txt file containing pytest and other test requirements
-    type: string
-    default: requirements.txt
 steps:
   - checkout
-  - install-requirements-txt:
-      file: <<parameters.requirements-txt-file>>
+  - python/install-packages:
+      pkg-manager: uv
   - run:
       name: Run Pytest
       command: |
         mkdir results
-        pytest --collect-only -q | head -n -2 | cut -d ':' -f 2- | sed 's/: *//' | circleci tests split --split-by=timings > split-tests
+        uv run -- pytest --collect-only -q | head -n -2 | cut -d ':' -f 2- | sed 's/: *//' | circleci tests split --split-by=timings > split-tests
         echo "Running the following tests:"
         cat split-tests
-        pytest -k "$(cat split-tests | awk -v d=' or ' '{s=(NR==1?s:s d)$0}END{print s}')" --junitxml=results/junit.xml <<parameters.pytest-args>>
+        uv run pytest -k "$(cat split-tests | awk -v d=' or ' '{s=(NR==1?s:s d)$0}END{print s}')" --junitxml=results/junit.xml <<parameters.pytest-args>>
   - store_test_results:
       path: results

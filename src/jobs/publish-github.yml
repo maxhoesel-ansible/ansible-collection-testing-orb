@@ -21,7 +21,8 @@ steps:
       name: Install golang
       command: |
         sudo apt-get update && sudo apt-get install -y golang
-  - install-requirements-txt
+  - python/install-packages:
+      pkg-manager: uv
   - build-install-collection:
       install: false
       path: <<parameters.build-dir>>
