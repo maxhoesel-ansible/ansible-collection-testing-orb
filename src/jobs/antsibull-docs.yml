@@ -6,13 +6,14 @@ parameters:
     description: Path to the folder containing the antsibull template
     type: string
     default: docs
-  python-version:
+  python_version:
     description: Python version to use for running antsibull-docs. Must be a valid tag for the cimg/python image
     type: string
-    default: "3.11"
-docker:
-  - image: cimg/python:<<parameters.python-version>>
-resource_class: small
+    default: "3.14"
+executor:
+  name: python
+  python_version: <<parameters.python_version>>
+  resource_class: small
 steps:
   - checkout
   - python/install-packages:

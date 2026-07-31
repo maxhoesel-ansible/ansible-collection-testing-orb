@@ -1,9 +1,9 @@
 description: Push the collection to a Github release.
 parameters:
-  python-version:
+  python_version:
     description: Python version of the circleci python image. Must be a valid tag for the cimg/python image
     type: string
-    default: "3.11"
+    default: "3.14"
   github-token-env-variable:
     description: Name of the environment variable containing the Github PAT
     type: string
@@ -12,9 +12,10 @@ parameters:
     description: Subdirectory to build the collection artifact in
     type: string
     default: ./build
-docker:
-  - image: cimg/python:<<parameters.python-version>>
-resource_class: small
+executor:
+  name: python
+  python_version: <<parameters.python_version>>
+  resource_class: small
 steps:
   - checkout
   - run:

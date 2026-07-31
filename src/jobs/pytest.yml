@@ -5,6 +5,18 @@ parameters:
     description: Additional parameters to pass to pytest
     type: string
     default: ""
+  image:
+    description: Machine executor image to use
+    type: string
+    default: 2026.07.1
+  resource_class:
+    description: Machine executor resource class
+    type: string
+    default: large
+executor:
+  name: machine
+  image: <<parameters.image>>
+  resource_class: <<parameters.resource_class>>
 steps:
   - checkout
   - python/install-packages:
