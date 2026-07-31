@@ -13,6 +13,8 @@ filters: &tagged
 
 jobs:
   build-install-collection-test:
+    executor: collection-testing/python
+    resource_class: small
     steps:
       - checkout
       - python/install-packages:
@@ -20,8 +22,6 @@ jobs:
       - collection-testing/build-install-collection:
           path: "buildinstall-test/"
           install: true
-          executor: collection-testing/python
-          resource_class: small
 
 workflows:
   test-deploy:
