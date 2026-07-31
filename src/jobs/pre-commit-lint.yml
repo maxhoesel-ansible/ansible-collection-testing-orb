@@ -16,5 +16,5 @@ steps:
   - python/install-packages:
       pkg-manager: uv
   - run:
-      command: pre-commit run --all-files
+      command: uv run pre-commit run --all-files
       name: Run pre-commit

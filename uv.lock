@@ -169,7 +169,7 @@ wheels = [
 ]
 
 [[package]]
-name = "ansible-collection-testing-orb"
+name = "ansible-collection-orb-test"
 version = "0.1.0"
 source = { virtual = "." }
 

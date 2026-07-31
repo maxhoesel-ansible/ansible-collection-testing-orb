@@ -25,7 +25,8 @@ steps:
       working_directory: <<parameters.dir>>
   - build-install-collection:
       install: true
+      ansible_galaxy_executable: uv run ansible-galaxy
   - run:
       name: Generate Docs
-      command: ./build.sh
+      command: uv run bash ./build.sh
       working_directory: <<parameters.dir>>

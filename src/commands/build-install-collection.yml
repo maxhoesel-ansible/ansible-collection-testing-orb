@@ -8,10 +8,14 @@ parameters:
     type: boolean
     default: false
     description: Whether to install the collection locally
+  ansible_galaxy_executable:
+    type: string
+    default: ansible-galaxy
+    description: How to execute ansible-galaxy
 steps:
   - run:
-      command: ansible-galaxy collection build --output-path <<parameters.path>> --force
+      command: <<parameters.ansible_galaxy_executable>> collection build --output-path <<parameters.path>> --force
       name: Build Collection
   - run:
-      command: ansible-galaxy collection install <<parameters.path>>/*.tar.gz --force
+      command: <<parameters.ansible_galaxy_executable>> collection install <<parameters.path>>/*.tar.gz --force
       name: Install Collection
