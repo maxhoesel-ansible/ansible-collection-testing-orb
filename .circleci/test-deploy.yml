@@ -43,17 +43,20 @@ workflows:
           filters: *tagged
           context:
             - collection-publishing
+          requires:
+            - orb-tools/pack
       - collection-testing/publish-galaxy:
           filters: *tagged
           context:
             - collection-publishing
+          requires:
+            - orb-tools/pack
 
       - orb-tools/publish:
           orb_name: maxhoesel-ansible/ansible-collection-testing
           vcs_type: << pipeline.project.type >>
           pub_type: production
           requires:
-            - orb-tools/pack
             - collection-testing/publish-github
             - collection-testing/publish-galaxy
           context:
