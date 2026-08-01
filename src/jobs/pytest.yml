@@ -5,20 +5,24 @@ parameters:
     description: Additional parameters to pass to pytest
     type: string
     default: ""
-  image:
-    description: Machine executor image to use
+  ubuntu_image:
+    description: Machine executor ubuntu image version to use
     type: string
-    default: ubuntu-2604:2026.07.1
+    default: 2604:2026.07.1
   resource_class:
     description: Machine executor resource class
     type: string
     default: large
 executor:
   name: machine
-  image: <<parameters.image>>
+  image: ubuntu-<<parameters.ubuntu_build>>
   resource_class: <<parameters.resource_class>>
 steps:
   - checkout
+  - run:
+      name: Install uv
+      command: |
+        snap install uv
   - python/install-packages:
       pkg-manager: uv
   - run:
