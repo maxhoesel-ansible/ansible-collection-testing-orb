@@ -43,9 +43,9 @@ workflows:
           context:
             - collection-publishing
       - orb-tools/publish:
-          orb-name: maxhoesel-ansible/ansible-collection-testing
-          vcs-type: << pipeline.project.type >>
-          pub-type: production
+          orb_name: maxhoesel-ansible/ansible-collection-testing
+          vcs_type: << pipeline.project.type >>
+          pub_type: production
           requires:
             - orb-tools/pack
             - build-install-collection-test
