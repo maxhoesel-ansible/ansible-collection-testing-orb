@@ -1,5 +1,6 @@
 version: 2.1
 orbs:
+  collection-testing: {}
   orb-tools: circleci/orb-tools@12.4.0
   python: circleci/python@4.0.0
 
