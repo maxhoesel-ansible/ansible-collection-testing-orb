@@ -18,21 +18,15 @@ workflows:
       - orb-tools/review:
           filters: *filters
           # RC009: Command length - triggers on scripts that can't be easily inlined due to parameter usage
-          exclude: "RC009"
+          # RC010: snake_casing for components - circleci doesn't even do this for their own components and its ugly
+          exclude: "RC009,RC010"
       - shellcheck/check:
-          filters: *filters
-      - orb-tools/publish:
-          orb_name: maxhoesel-ansible/ansible-collection-testing
-          vcs_type: << pipeline.project.type >>
-          requires:
-            [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
-          # Use a context to hold your publishing token.
-          context: orb-publishing
           filters: *filters
       # Triggers the next workflow in the Orb Development Kit.
       - orb-tools/continue:
           orb_name: maxhoesel-ansible/ansible-collection-testing
           pipeline_number: << pipeline.number >>
           vcs_type: << pipeline.project.type >>
-          requires: [orb-tools/publish]
+          requires:
+            [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
           filters: *filters

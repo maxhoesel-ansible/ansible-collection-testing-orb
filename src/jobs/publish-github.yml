@@ -4,11 +4,11 @@ parameters:
     description: Python version of the circleci python image. Must be a valid tag for the cimg/python image
     type: string
     default: "3.14"
-  github-token-env-variable:
+  github_token_env_variable:
     description: Name of the environment variable containing the Github PAT
     type: string
     default: GITHUB_TOKEN
-  build-dir:
+  build_dir:
     description: Subdirectory to build the collection artifact in
     type: string
     default: ./build
@@ -26,7 +26,7 @@ steps:
       pkg-manager: uv
   - build-install-collection:
       install: false
-      path: <<parameters.build-dir>>
+      path: <<parameters.build_dir>>
   - run:
       name: Append collection to github release
       command: |
@@ -34,4 +34,4 @@ steps:
         # Grab the most recent semver tag
         VERSION=$(git describe --tags --abbrev=0 | grep -P '^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')
         # Upload built artifacts
-        $(go env GOPATH)/bin/ghr -t ${<<parameters.github-token-env-variable>>} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} <<parameters.build-dir>>/
+        $(go env GOPATH)/bin/ghr -t ${<<parameters.github_token_env_variable>>} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${VERSION} <<parameters.build_dir>>/

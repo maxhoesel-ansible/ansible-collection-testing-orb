@@ -4,11 +4,11 @@ parameters:
     description: Python version of the circleci python image. Must be a valid tag for the cimg/python image
     type: string
     default: "3.14"
-  token-env-variable:
+  token_env_variable:
     description: Name of the environment variable containing the Galaxy API token
     type: string
     default: GALAXY_API_TOKEN
-  build-dir:
+  build_dir:
     description: Subdirectory to build the collection artifact in
     type: string
     default: ./build
@@ -22,8 +22,8 @@ steps:
       pkg-manager: uv
   - build-install-collection:
       install: false
-      path: <<parameters.build-dir>>
+      path: <<parameters.build_dir>>
       ansible_galaxy_executable: uv run ansible-galaxy
   - run:
       name: Upload collection to ansible-galaxy
-      command: uv run ansible-galaxy collection publish <<parameters.build-dir>>/*.tar.gz --token ${<<parameters.token-env-variable>>}
+    command: uv run ansible-galaxy collection publish <<parameters.build_dir>>/*.tar.gz --token ${<<parameters.token_env_variable>>}

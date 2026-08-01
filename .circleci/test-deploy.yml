@@ -1,6 +1,5 @@
 version: 2.1
 orbs:
-  collection-testing: maxhoesel-ansible/ansible-collection-testing@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@12.4.0
   python: circleci/python@4.0.0
 
@@ -32,8 +31,13 @@ workflows:
       - collection-testing/antsibull-docs
       - collection-testing/pre-commit-lint:
           requirements-file: requirements.txt
+
       - orb-tools/pack:
           filters: *tagged
+          requires:
+            - build-install-collection-test
+            - collection-testing/antsibull-docs
+            - collection-testing/pre-commit-lint
       - collection-testing/publish-github:
           filters: *tagged
           context:
@@ -42,15 +46,13 @@ workflows:
           filters: *tagged
           context:
             - collection-publishing
+
       - orb-tools/publish:
           orb_name: maxhoesel-ansible/ansible-collection-testing
           vcs_type: << pipeline.project.type >>
           pub_type: production
           requires:
             - orb-tools/pack
-            - build-install-collection-test
-            - collection-testing/antsibull-docs
-            - collection-testing/pre-commit-lint
             - collection-testing/publish-github
             - collection-testing/publish-galaxy
           context:
