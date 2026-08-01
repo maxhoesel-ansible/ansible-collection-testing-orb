@@ -1,7 +1,7 @@
 description: >
   Run Pytest to execute collection tests, with support for parallelism and timing-based splitting
 parameters:
-  pytest_args:
+  pytest-args:
     description: Additional parameters to pass to pytest
     type: string
     default: ""
@@ -33,6 +33,6 @@ steps:
         uv run -- pytest --collect-only -q | head -n -2 | cut -d ':' -f 2- | sed 's/: *//' | circleci tests split --split-by=timings > split-tests
         echo "Running the following tests:"
         cat split-tests
-        uv run -- pytest -k "$(cat split-tests | awk -v d=' or ' '{s=(NR==1?s:s d)$0}END{print s}')" --junitxml=results/junit.xml <<parameters.pytest_args>>
+        uv run -- pytest -k "$(cat split-tests | awk -v d=' or ' '{s=(NR==1?s:s d)$0}END{print s}')" --junitxml=results/junit.xml <<parameters.pytest-args>>
   - store_test_results:
       path: results
