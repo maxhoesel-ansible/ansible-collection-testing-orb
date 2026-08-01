@@ -6,6 +6,10 @@ orbs:
 
 filters: &tagged
   tags:
+    only: /.*/
+
+release-filters: &release-tagged
+  tags:
     only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*).*$/
   branches:
     ignore: /.*/
@@ -27,25 +31,29 @@ workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - build-install-collection-test
-      - collection-testing/pytest
-      - collection-testing/antsibull-docs
-      - collection-testing/pre-commit-lint
+      - build-install-collection-test:
+          filters: *tagged
+      - collection-testing/pytest:
+          filters: *tagged
+      - collection-testing/antsibull-docs:
+          filters: *tagged
+      - collection-testing/pre-commit-lint:
+          filters: *tagged
 
       - orb-tools/pack:
-          filters: *tagged
+          filters: *release-tagged
           requires:
             - build-install-collection-test
             - collection-testing/antsibull-docs
             - collection-testing/pre-commit-lint
       - collection-testing/publish-github:
-          filters: *tagged
+          filters: *release-tagged
           context:
             - collection-publishing
           requires:
             - orb-tools/pack
       - collection-testing/publish-galaxy:
-          filters: *tagged
+          filters: *release-tagged
           context:
             - collection-publishing
           requires:
@@ -60,4 +68,4 @@ workflows:
             - collection-testing/publish-galaxy
           context:
             - orb-publishing
-          filters: *tagged
+          filters: *release-tagged
