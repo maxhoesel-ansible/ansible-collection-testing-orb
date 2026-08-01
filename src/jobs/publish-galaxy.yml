@@ -26,4 +26,4 @@ steps:
       ansible_galaxy_executable: uv run ansible-galaxy
   - run:
       name: Upload collection to ansible-galaxy
-    command: uv run ansible-galaxy collection publish <<parameters.build_dir>>/*.tar.gz --token ${<<parameters.token_env_variable>>}
+      command: uv run ansible-galaxy collection publish <<parameters.build_dir>>/*.tar.gz --token ${<<parameters.token_env_variable>>}
