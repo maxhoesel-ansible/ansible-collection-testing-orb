@@ -23,7 +23,7 @@ steps:
       name: Install uv
       command: |
         sudo apt update && sudo apt install -y snapd
-        sudo snap install uv
+        sudo snap install astral-uv
   - python/install-packages:
       pkg-manager: uv
   - run:
