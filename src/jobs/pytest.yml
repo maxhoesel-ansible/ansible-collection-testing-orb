@@ -13,10 +13,15 @@ parameters:
     description: Machine executor resource class
     type: string
     default: large
+  parallelism:
+    description: Number of jobs to run in parallel
+    type: integer
+    default: 1
 executor:
   name: machine
   image: ubuntu-<<parameters.ubuntu_image>>
   resource_class: <<parameters.resource_class>>
+parallelism: <<parameters.parallelism>>
 steps:
   - checkout
   - run:
