@@ -17,6 +17,10 @@ parameters:
     description: Number of jobs to run in parallel
     type: integer
     default: 1
+  uv_sync_args:
+    description: Arguments to add to the uv sync command
+    type: string
+    default: ""
 executor:
   name: machine
   image: ubuntu-<<parameters.ubuntu_image>>
@@ -31,7 +35,7 @@ steps:
         sudo snap install --classic astral-uv
   - python/install-packages:
       pkg-manager: uv
-      args: --locked
+      args: --locked <<parameters.uv_sync_args>>
   - run:
       name: Run Pytest
       command: |
