@@ -22,7 +22,8 @@ steps:
   - run:
       name: Install uv
       command: |
-        snap install uv
+        sudo apt update && sudo apt install -y snapd
+        sudo snap install uv
   - python/install-packages:
       pkg-manager: uv
   - run:
