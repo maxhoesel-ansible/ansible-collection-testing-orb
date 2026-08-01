@@ -30,8 +30,7 @@ workflows:
       - build-install-collection-test
       - collection-testing/pytest
       - collection-testing/antsibull-docs
-      - collection-testing/pre-commit-lint:
-          requirements-file: requirements.txt
+      - collection-testing/pre-commit-lint
 
       - orb-tools/pack:
           filters: *tagged
