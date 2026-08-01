@@ -12,6 +12,7 @@ steps:
   - checkout
   - python/install-packages:
       pkg-manager: uv
+      args: --locked
   - run:
-      command: uv run pre-commit run --all-files
+      command: uv run --locked pre-commit run --all-files
       name: Run pre-commit

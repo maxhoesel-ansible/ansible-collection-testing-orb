@@ -20,10 +20,11 @@ steps:
   - checkout
   - python/install-packages:
       pkg-manager: uv
+      args: --locked
   - build-install-collection:
       install: false
       path: <<parameters.build_dir>>
-      ansible_galaxy_executable: uv run ansible-galaxy
+      ansible_galaxy_executable: uv run --locked ansible-galaxy
   - run:
       name: Upload collection to ansible-galaxy
-      command: uv run ansible-galaxy collection publish <<parameters.build_dir>>/*.tar.gz --token ${<<parameters.token_env_variable>>}
+      command: uv run --locked ansible-galaxy collection publish <<parameters.build_dir>>/*.tar.gz --token ${<<parameters.token_env_variable>>}

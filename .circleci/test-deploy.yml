@@ -25,7 +25,7 @@ jobs:
       - collection-testing/build-install-collection:
           path: "buildinstall-test/"
           install: true
-          ansible_galaxy_executable: uv run ansible-galaxy
+          ansible_galaxy_executable: uv run --locked ansible-galaxy
 
 workflows:
   test-deploy:

@@ -24,10 +24,11 @@ steps:
         sudo apt-get update && sudo apt-get install -y golang
   - python/install-packages:
       pkg-manager: uv
+      args: --locked
   - build-install-collection:
       install: false
       path: <<parameters.build_dir>>
-      ansible_galaxy_executable: uv run ansible-galaxy
+      ansible_galaxy_executable: uv run --locked ansible-galaxy
   - run:
       name: Append collection to github release
       command: |

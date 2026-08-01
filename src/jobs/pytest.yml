@@ -31,13 +31,14 @@ steps:
         sudo snap install --classic astral-uv
   - python/install-packages:
       pkg-manager: uv
+      args: --locked
   - run:
       name: Run Pytest
       command: |
         mkdir results
-        uv run -- pytest --collect-only -q | head -n -2 | cut -d ':' -f 2- | sed 's/: *//' | circleci tests split --split-by=timings > split-tests
+        uv run --locked -- pytest --collect-only -q | head -n -2 | cut -d ':' -f 2- | sed 's/: *//' | circleci tests split --split-by=timings > split-tests
         echo "Running the following tests:"
         cat split-tests
-        uv run -- pytest -k "$(cat split-tests | awk -v d=' or ' '{s=(NR==1?s:s d)$0}END{print s}')" --junitxml=results/junit.xml <<parameters.pytest_args>>
+        uv run --locked -- pytest -k "$(cat split-tests | awk -v d=' or ' '{s=(NR==1?s:s d)$0}END{print s}')" --junitxml=results/junit.xml <<parameters.pytest_args>>
   - store_test_results:
       path: results
