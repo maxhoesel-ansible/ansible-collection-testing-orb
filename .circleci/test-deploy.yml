@@ -1,44 +1,40 @@
 version: 2.1
 orbs:
-  collection-testing: maxhoesel-ansible/ansible-collection-testing@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@12.4.0
   python: circleci/python@4.0.0
-
 filters: &tagged
   tags:
     only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)([-+].*)?$/
   branches:
     ignore: /.*/
-
 jobs:
-  build-install-collection-test:
+  build_install_collection_test:
     executor: collection-testing/python
     resource_class: small
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: uv
-      - collection-testing/build-install-collection:
+      - collection-testing/build_install_collection:
           path: "buildinstall-test/"
           install: true
           ansible_galaxy_executable: uv run ansible-galaxy
-
 workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - build-install-collection-test
+      - build_install_collection_test
       - collection-testing/pytest
-      - collection-testing/antsibull-docs
-      - collection-testing/pre-commit-lint:
+      - collection-testing/antsibull_docs
+      - collection-testing/pre_commit_lint:
           requirements-file: requirements.txt
       - orb-tools/pack:
           filters: *tagged
-      - collection-testing/publish-github:
+      - collection-testing/publish_github:
           filters: *tagged
           context:
             - collection-publishing
-      - collection-testing/publish-galaxy:
+      - collection-testing/publish_galaxy:
           filters: *tagged
           context:
             - collection-publishing
@@ -48,11 +44,11 @@ workflows:
           pub_type: production
           requires:
             - orb-tools/pack
-            - build-install-collection-test
-            - collection-testing/antsibull-docs
-            - collection-testing/pre-commit-lint
-            - collection-testing/publish-github
-            - collection-testing/publish-galaxy
+            - build_install_collection-test
+            - collection-testing/antsibull_docs
+            - collection-testing/pre_commit_lint
+            - collection-testing/publish_github
+            - collection-testing/publish_galaxy
           context:
             - orb-publishing
           filters: *tagged

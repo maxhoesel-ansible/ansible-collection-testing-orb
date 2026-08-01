@@ -15,20 +15,20 @@ usage:
   workflows:
     ci:
       jobs:
-        - collection-test/pre-commit-lint:
+        - collection-test/pre_commit_lint:
             name: Lint with Pre-Commit
-        - collection-test/antsibull-docs:
+        - collection-test/antsibull_docs:
             name: Generate Docs
             collection-name: maxhoesel.smallstep
         - collection-test/pytest:
             name: Run Pytest
             parallelism: 6
             pytest-args: "--custom-arg abc"
-        - collection-testing/publish-github:
+        - collection-testing/publish_github:
             name: Publish Release to GitHub
             context: collection-publishing
             filters: *semver-tagged
-        - collection-testing/publish-galaxy:
+        - collection-testing/publish_galaxy:
             name: Publish to Galaxy
             context: collection-publishing
             filters: *semver-tagged
